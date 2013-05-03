@@ -1,0 +1,17 @@
+All of the source code to this product is available under licenses that are both
+free and open source.
+
+Most of it is available under the Mozilla Public License 2.0 (MPL), as specified
+by the license headers in each file.  Some of it (like the ADB executable that
+is packaged with builds) is available under the terms of a LICENSE file in its
+directory.  And some of it is available under other licenses as specified below.
+
+--------------------------------------------------------------------------------
+The following files:
+
+    json.lua
+
+Are available under the following license:
+
+  MIT/X
+  https://github.com/craigmj/json4lua

@@ -1,0 +1,43 @@
+@startuml
+
+start
+
+:sniff traffic on lo interface:
+
+<i>tshark -w test.pcap -i lo</i>;
+
+:collect Remote Debugger Protocol exchange:
+
+<i>OUT="out.json" tshark -r test.pcap -Xlua_script:RDPCollector.lua</i>
+
+will try to auto-detect RemoteDebuggerServer Port and dump messages to out.json;
+
+if (RemoteDebugger Server port not detect and/or <b>out.json</b> is incorrect)
+   :manually look to the dump:
+
+   <i>tshark -r test.pcap -R "tcp" -x | less</i>
+
+   or:
+
+   <i>tshark -r test.pcap -R "tcp contains applicationType" -x | less</i>;
+
+   :filtered pcap file analysis:
+
+   <i>OUT="test.json" PORT=34561 tshark -r test.pcap -Xlua_script:RDPCollector.lua</i>
+
+   (e.g. PORT=34561 if DebuggerServer is listening on tcp 34561);
+endif
+
+:generate plantuml sequence diagram:
+
+<i>node RDPDiagramGenerator.js test.json</i>
+
+(generate an <b>out.plantuml</b> text file);
+
+:generate sequence diagram png:
+
+<i>plantuml out.plantuml</i>
+
+(generate out.png);
+
+@enduml
